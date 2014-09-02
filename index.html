@@ -6,6 +6,62 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <script src="js/angular.min.js"></script>
   <script src="js/angular.main.js"></script>
+    <script src="js/jquery-2.1.1.min.js"></script>
+  <script src="js/popcorn-complete.min.js"></script>
+  <script>
+      // ensure the web page (DOM) has loaded
+      document.addEventListener("DOMContentLoaded", function () {
+ 
+        wrapper = Popcorn.HTMLYouTubeVideoElement( "#video" );
+        wrapper.src = "http://www.youtube.com/embed/Gc2en3nHxA4&?autohide=1&modestbranding=1&playsinline=1&rel=0&showinfo=0&theme=dark&controls=2&playsinline=1";
+        pop = Popcorn(wrapper);
+        pop.timeline
+        ({
+            start: 28,
+            target: "caption",
+            title: '<a href="#">Bitcoin Exchange</a>',
+            text:"",
+            innerHTML:"",
+            direction: "up"
+        })
+        .timeline
+        ({
+            start: 34,
+            target: "caption",
+            title: '<a href="#">Bitcoin Wallet</a>',
+            text: "",
+            innerHTML: "",
+            direction: "up"
+        })
+        .timeline
+        ({
+            start: 42,
+            target: "caption",
+            title: '<a href="#">Bitcoin Merchant</a>',
+            text: "",
+            innerHTML: "",
+            direction: "up"
+        })
+        .timeline
+        ({
+            start: 47,
+            target: "caption",
+            title: '<a href="#">Bitcoin Miner</a>',
+            text: "",
+            innerHTML: "",
+            direction: "up"
+        })
+        .timeline({
+            start: 57,
+            target: "caption",
+            title: '<a href="#">Bitcoin Blockchain</a>',
+            text: "",
+            innerHTML: "",
+            direction: "up"
+        });
+        
+      }, false);
+    </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -42,12 +98,10 @@
     <div class="row">
         <div class="col-lg-10 main-video">
             <div class="flex-video widescreen">
-                <iframe src="https://www.youtube.com/embed/Gc2en3nHxA4?autohide=1&modestbranding=1&playsinline=1&rel=0&showinfo=0&theme=dark" frameborder="0" allowfullscreen></iframe>
+                <div id="video"></div>
             </div>
         </div>
-        <div class="col-lg-2">
-            <h1>Captions will eventually go here!</h1>
-        </div>
+        <div id="caption" class="col-lg-2"></div>
     </div>
 
     <div class="row">
@@ -57,7 +111,6 @@
     </div>
   </div>
 
-  <script src="js/jquery-2.1.1.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
