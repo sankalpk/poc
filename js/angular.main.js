@@ -20,7 +20,7 @@ jadyuApp.factory('Data', function(){
                 {
                     start: 28,
                     target: "caption",
-                    title: '<a ng-click="changeTopic(2)">Bitcoin Exchange</a>',
+                    title: '<a href="/#bitcoin-exchange" ng-click="changeTopicOnClick(2,$event)">Bitcoin Exchange</a>',
                     text:"",
                     innerHTML:"",
                     direction: "up"
@@ -62,12 +62,31 @@ jadyuApp.factory('Data', function(){
         {
             id: 2,   
             title: "Bitcoin Exchange",
-            startTime:0,
-            endTime:16,
-            videoId: "Udfygto6C18",
+            startTime:63,
+            endTime:156,
+            videoId: "mB0K7ybVOL8",
             type: "YouTube",
             path: "bitcoin-exchange",
-            interlinks:[]
+            interlinks:
+            [
+                {
+                    start: 106,
+                    target: 'caption',
+                    title: '<a ng-click="changeTopic(1)">Bitcoin</a>',
+                    text: "",
+                    innerHTML: "",
+                    direction:"up"
+                },
+                {                
+                    start: 110,
+                    target: 'caption',
+                    title: '<a ng-click="changeTopic(1)">Altcoin</a>',
+                    text: "",
+                    innerHTML: "",
+                    direction:"up"
+
+                }
+            ]
         }
     ]
     return topics;
@@ -113,6 +132,12 @@ jadyuApp.controller('TopicCtrl', function ($scope, $http, $filter, Data) {
             });
             pop.play(topic.startTime);
         },1000);
+    }
+
+    $scope.changeTopicOnClick = function(id,event){
+        if(event.metaKey===false&&event.ctrlKey===false){
+            $scope.changeTopic(id);
+        }
     }
 
     $scope.changeTopic = function(id){
