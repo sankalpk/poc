@@ -133,7 +133,7 @@ jadyuApp.controller('TopicCtrl', function ($scope, $http, $filter, Data, $locati
         },1000);
     }
 
-    $scope.changeTopic = function(id){
+    $scope.changeTopicById = function(id){
         for(var i=0;i<$scope.topics.length;i++){
             if($scope.topics[i].id===id){
                 $scope.currentTopic = $scope.topics[i];
