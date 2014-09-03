@@ -13,6 +13,8 @@ jadyuApp.factory('Data', function(){
             video_id: "Gc2en3nHxA4",
             type: "YouTube",
             path: "bitcoin",
+            startTime: 16,
+            endTime: 20,
             interlinks:
             [
                 {
@@ -93,7 +95,8 @@ jadyuApp.controller('TopicCtrl', function ($scope, $http, $filter, Data) {
         wrapper.src = "http://www.youtube.com/embed/"+
                       $scope.currentTopic.video_id+
                       "?autohide=1&modestbranding=1&playsinline=1&rel=0"+
-                      "&showinfo=0&theme=dark&controls=2&playsinline=1";
+                      "&showinfo=0&theme=dark&controls=2&playsinline=1"+
+                      "&end="+topic.endTime.toString();
         
         //add timeline events to video
         var pop = Popcorn(wrapper);
@@ -102,6 +105,7 @@ jadyuApp.controller('TopicCtrl', function ($scope, $http, $filter, Data) {
         }
         
         //compile timeline events so directives work
+        //also play the video
         setTimeout(function(){
             var injector = angular.element(captionDiv).injector();
             var element = angular.element(captionDiv);
@@ -109,6 +113,7 @@ jadyuApp.controller('TopicCtrl', function ($scope, $http, $filter, Data) {
                 var scope = element.scope();
                 $compile(element)(scope);
             });
+            pop.play(topic.startTime);
         },1000);
     }
 
