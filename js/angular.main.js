@@ -20,7 +20,7 @@ jadyuApp.factory('Data', function(){
                 {
                     start: 28,
                     target: "caption",
-                    title: '<a href="/#bitcoin-exchange" ng-click="changeTopicOnClick(2,$event)">Bitcoin Exchange</a>',
+                    title: '<a href="#/bitcoin-exchange">Bitcoin Exchange</a>',
                     text:"",
                     innerHTML:"",
                     direction: "up"
@@ -28,7 +28,7 @@ jadyuApp.factory('Data', function(){
                 {
                     start: 34,
                     target: "caption",
-                    title: '<a ng-click="changeTopic(2)">Bitcoin Wallet</a>',
+                    title: '<a href="#/bitcoin-wallet">Bitcoin Wallet</a>',
                     text: "",
                     innerHTML: "",
                     direction: "up"
@@ -92,7 +92,7 @@ jadyuApp.factory('Data', function(){
     return topics;
 });
 
-jadyuApp.controller('TopicCtrl', function ($scope, $http, $filter, Data) {
+jadyuApp.controller('TopicCtrl', function ($scope, $http, $filter, Data, $location) {
 
     /* Behavior */
     /* ------------------------ */
@@ -101,7 +101,6 @@ jadyuApp.controller('TopicCtrl', function ($scope, $http, $filter, Data) {
     //but short of rewriting popcornjs, this is a decent way to do it.
     $scope.initializeTopic = function(topic){
         //clear any captions
-        window.location.hash=topic.path;
         var captionDiv = document.getElementById("caption");
         var videoDiv = document.getElementById("video");
         captionDiv.innerHTML="";
@@ -110,7 +109,7 @@ jadyuApp.controller('TopicCtrl', function ($scope, $http, $filter, Data) {
         //load video into dom
         var wrapper = Popcorn.HTMLYouTubeVideoElement("#video");
         wrapper.src = "http://www.youtube.com/embed/"+
-                      $scope.currentTopic.videoId+
+                      topic.videoId+
                       "?autohide=1&modestbranding=1&playsinline=1&rel=0"+
                       "&showinfo=0&theme=dark&controls=2&playsinline=1"+
                       "&end="+topic.endTime.toString();
@@ -134,12 +133,6 @@ jadyuApp.controller('TopicCtrl', function ($scope, $http, $filter, Data) {
         },1000);
     }
 
-    $scope.changeTopicOnClick = function(id,event){
-        if(event.metaKey===false&&event.ctrlKey===false){
-            $scope.changeTopic(id);
-        }
-    }
-
     $scope.changeTopic = function(id){
         for(var i=0;i<$scope.topics.length;i++){
             if($scope.topics[i].id===id){
@@ -153,6 +146,7 @@ jadyuApp.controller('TopicCtrl', function ($scope, $http, $filter, Data) {
         for(var i=0;i<$scope.topics.length;i++){
             if($scope.topics[i].path===path){
                 $scope.currentTopic = $scope.topics[i];
+                $scope.initializeTopic($scope.topics[i]);
                 break;
             }
         }
@@ -161,12 +155,11 @@ jadyuApp.controller('TopicCtrl', function ($scope, $http, $filter, Data) {
     /* Initialization */
     /* ------------------------ */
     $scope.topics = Data;
-    $scope.changeTopicByPath(window.location.hash.slice(1));
 
     /* Watches */
     /* ------------------------ */
-    $scope.$watchGroup(["currentTopic"], function() {
-        $scope.initializeTopic($scope.currentTopic);
+    $scope.$on('$locationChangeStart', function(){
+        $scope.changeTopicByPath($location.path().slice(1));
     });
 
 });
