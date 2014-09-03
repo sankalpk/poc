@@ -18,7 +18,7 @@ jadyuApp.factory('Data', function(){
             interlinks:
             [
                 {
-                    start: 1,
+                    start: 28,
                     target: "caption",
                     title: '<a ng-click="changeTopic(2)">Bitcoin Exchange</a>',
                     text:"",
@@ -62,6 +62,8 @@ jadyuApp.factory('Data', function(){
         {
             id: 2,   
             title: "Bitcoin Exchange",
+            startTime:0,
+            endTime:16,
             video_id: "Udfygto6C18",
             type: "YouTube",
             path: "bitcoin-exchange",

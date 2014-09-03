@@ -39,3 +39,7 @@
 #video-submit-form button{
   margin-top:2px;
 }
+
+#caption a{
+  cursor:pointer;
+}
