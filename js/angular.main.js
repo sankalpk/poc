@@ -13,8 +13,8 @@ jadyuApp.factory('Data', function(){
             videoId: "Gc2en3nHxA4",
             type: "YouTube",
             path: "bitcoin",
-            startTime: 16,
-            endTime: 20,
+            startTime: 0,
+            endTime: 96,
             interlinks:
             [
                 {
@@ -74,11 +74,6 @@ jadyuApp.factory('Data', function(){
 });
 
 jadyuApp.controller('TopicCtrl', function ($scope, $http, $filter, Data) {
-    
-    /* Initialization */
-    /* ------------------------ */
-    $scope.topics = Data;
-    $scope.currentTopic = $scope.topics[0];
 
     /* Behavior */
     /* ------------------------ */
@@ -87,6 +82,7 @@ jadyuApp.controller('TopicCtrl', function ($scope, $http, $filter, Data) {
     //but short of rewriting popcornjs, this is a decent way to do it.
     $scope.initializeTopic = function(topic){
         //clear any captions
+        window.location.hash=topic.path;
         var captionDiv = document.getElementById("caption");
         var videoDiv = document.getElementById("video");
         captionDiv.innerHTML="";
@@ -127,6 +123,20 @@ jadyuApp.controller('TopicCtrl', function ($scope, $http, $filter, Data) {
             }
         }
     }
+
+    $scope.changeTopicByPath = function(path){
+        for(var i=0;i<$scope.topics.length;i++){
+            if($scope.topics[i].path===path){
+                $scope.currentTopic = $scope.topics[i];
+                break;
+            }
+        }
+    }
+
+    /* Initialization */
+    /* ------------------------ */
+    $scope.topics = Data;
+    $scope.changeTopicByPath(window.location.hash.slice(1));
 
     /* Watches */
     /* ------------------------ */
