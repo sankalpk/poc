@@ -10,7 +10,7 @@ jadyuApp.factory('Data', function(){
         {
             id: 1,   
             title: "Bitcoin",
-            video_id: "Gc2en3nHxA4",
+            videoId: "Gc2en3nHxA4",
             type: "YouTube",
             path: "bitcoin",
             startTime: 16,
@@ -64,7 +64,7 @@ jadyuApp.factory('Data', function(){
             title: "Bitcoin Exchange",
             startTime:0,
             endTime:16,
-            video_id: "Udfygto6C18",
+            videoId: "Udfygto6C18",
             type: "YouTube",
             path: "bitcoin-exchange",
             interlinks:[]
@@ -95,7 +95,7 @@ jadyuApp.controller('TopicCtrl', function ($scope, $http, $filter, Data) {
         //load video into dom
         var wrapper = Popcorn.HTMLYouTubeVideoElement("#video");
         wrapper.src = "http://www.youtube.com/embed/"+
-                      $scope.currentTopic.video_id+
+                      $scope.currentTopic.videoId+
                       "?autohide=1&modestbranding=1&playsinline=1&rel=0"+
                       "&showinfo=0&theme=dark&controls=2&playsinline=1"+
                       "&end="+topic.endTime.toString();
@@ -107,7 +107,7 @@ jadyuApp.controller('TopicCtrl', function ($scope, $http, $filter, Data) {
         }
         
         //compile timeline events so directives work
-        //also play the video
+        //and play the video
         setTimeout(function(){
             var injector = angular.element(captionDiv).injector();
             var element = angular.element(captionDiv);
