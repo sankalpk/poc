@@ -2,7 +2,7 @@
 /* ------------------- */
 'use strict';
 
-var jadyuApp = angular.module('app', []);
+var jadyuApp = angular.module('app', ['ui.bootstrap']);
 
 jadyuApp.factory('Data', function(){
     var topics =
@@ -504,9 +504,21 @@ jadyuApp.controller('TopicCtrl', function ($scope, $http, $filter, Data, $locati
         }
     }
 
+    $scope.addAlert = function() {
+        $scope.alerts.push({msg: 'Thanks for your contribution! Your video will be voted on by the community. (Not really, this is a demo)'});
+        console.log("Alert added");
+    };
+
+    $scope.closeAlert = function(index) {
+        $scope.alerts.splice(index, 1);
+    };
+
     /* Initialization */
     /* ------------------------ */
     $scope.topics = Data;
+    $scope.alerts = [];
+    $scope.isAdvanced=true;
+    $scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
 
     /* Watches */
     /* ------------------------ */

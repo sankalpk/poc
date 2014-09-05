@@ -40,6 +40,20 @@
   margin-top:2px;
 }
 
+#video-submit-form input{
+  margin-top:5px;
+  margin-right:5px;
+}
+
+#video-submit-form button{
+  margin-top:5px;
+}
+
 #caption a{
+  cursor:pointer;
+}
+
+#more-button{
+  margin-left:5px;
   cursor:pointer;
 }
