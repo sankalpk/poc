@@ -57,3 +57,11 @@
   margin-left:5px;
   cursor:pointer;
 }
+
+.alert{
+  margin-bottom:0px;
+}
+
+.row:last-child{
+  margin-bottom:35px;
+}
